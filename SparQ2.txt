@@ -1,0 +1,281 @@
+You are GitHub Copilot inside a new monorepo for an app called **SparQ2**.
+
+Goal:
+Create a lean, minimal, production‑ready scaffold that supports:
+- Backend API (Railway‑ready) using Firebase Admin + Stripe
+- Web app (React or Next.js)
+- Hybrid mobile app (Expo/React Native)
+- Shared package for types, models, and utilities
+
+Use the **fewest providers possible**:
+- Firebase (auth, Firestore, storage, notifications, analytics)
+- Stripe (payments + Connect)
+- Railway (backend runtime + webhooks)
+No other providers unless absolutely necessary.
+
+====================================================
+1. ROOT MONOREPO STRUCTURE
+====================================================
+
+Create:
+
+/apps
+  /web
+  /mobile
+/packages
+  /api
+  /shared
+
+Root files:
+- package.json (workspace)
+- README.md
+- .gitignore
+- .env.example
+
+Use npm or pnpm workspaces (your choice, but be consistent).
+
+====================================================
+2. BACKEND API (packages/api)
+====================================================
+
+Tech:
+- Node.js
+- Express (ESM)
+- Firebase Admin SDK
+- Stripe SDK
+- Railway‑friendly config
+
+Structure:
+
+/packages/api
+  /src
+    /api
+      /routes
+      /controllers
+      /middleware
+    /services
+    /config
+    /models
+    /utils
+  /tests
+  package.json
+
+Core features:
+
+- Server:
+  - src/api/server.js
+  - Uses Express
+  - Reads PORT from env (default 4000)
+  - Health route: GET /health → { status: "ok", service: "SparQ2 API" }
+  - Version route: GET /version → { app: "SparQ2", version: "0.1.0" }
+
+- Firebase Admin:
+  - src/config/firebaseAdmin.js
+  - Initialize Admin SDK using service account from env
+  - Export auth, firestore, storage
+
+- Stripe:
+  - src/config/stripe.js
+  - Initialize Stripe with STRIPE_SECRET_KEY from env
+
+- Auth middleware:
+  - src/api/middleware/auth.js
+  - Verifies Firebase ID token from Authorization header
+  - Attaches user to req.user
+
+- Routes:
+  - src/api/routes/auth.js
+    - GET /me → returns current user profile from Firestore
+  - src/api/routes/billing.js
+    - POST /billing/create-checkout-session
+    - POST /billing/portal
+  - src/api/routes/webhooks.js
+    - POST /webhooks/stripe → handles Stripe events
+  - src/api/routes/ai.js
+    - POST /ai/run → calls AIService placeholder
+  - src/api/routes/clients.js, /tasks.js, /notes.js, /files.js
+    - CRUD stubs using Firestore
+
+- Controllers:
+  - Matching controllers for each route file
+
+- Services:
+  - src/services/UserService.js
+  - src/services/BillingService.js
+  - src/services/NotificationService.js (Firebase FCM stub)
+  - src/services/FileService.js (Firebase Storage)
+  - src/services/AIService.js (placeholder for future SparQBrain)
+
+- Config:
+  - src/config/config.js
+    - APP_NAME, APP_VERSION, PORT
+    - FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY
+    - STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET
+
+- Utils:
+  - src/utils/asyncHandler.js
+  - src/utils/errors.js
+  - src/utils/logger.js
+
+- Tests:
+  - Basic tests for /health and /version
+
+.env.example for API:
+
+API_PORT=4000
+FIREBASE_PROJECT_ID=
+FIREBASE_CLIENT_EMAIL=
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+
+====================================================
+3. SHARED PACKAGE (packages/shared)
+====================================================
+
+/packages/shared
+  /src
+    /types
+    /models
+    /utils
+  package.json
+
+Include:
+- Shared TypeScript types or JSDoc typedefs for:
+  - User
+  - Client
+  - Task
+  - Note
+  - File
+  - Subscription/Plan
+- Shared validation helpers
+- Shared constants (APP_NAME, roles, feature flags)
+
+Both web and mobile apps, and the API, should import from this package.
+
+====================================================
+4. WEB APP (apps/web)
+====================================================
+
+Tech:
+- React with Vite (or Next.js if you detect it’s already preferred)
+- Firebase client SDK
+- React Router (if Vite)
+- Minimal UI (no heavy component library unless necessary)
+
+Structure:
+
+/apps/web
+  /src
+    /components
+    /pages (or /routes)
+    /hooks
+    /providers
+    /config
+  index.html (if Vite)
+  package.json
+
+Core features:
+
+- Firebase client config:
+  - src/config/firebaseClient.ts or .js
+  - Uses env vars:
+    - VITE_FIREBASE_API_KEY
+    - VITE_FIREBASE_AUTH_DOMAIN
+    - VITE_FIREBASE_PROJECT_ID
+    - VITE_FIREBASE_STORAGE_BUCKET
+    - VITE_FIREBASE_MESSAGING_SENDER_ID
+    - VITE_FIREBASE_APP_ID
+
+- Auth:
+  - Email/password login
+  - Google OAuth (optional)
+  - AuthProvider with context
+  - useAuth() hook
+
+- Pages:
+  - /login
+  - /dashboard
+  - /clients
+  - /tasks
+  - /notes
+  - /files
+  - /billing
+
+- API client:
+  - src/utils/apiClient.js
+  - Attaches Firebase ID token to Authorization header
+  - Talks to Railway API base URL from env:
+    - VITE_API_BASE_URL
+
+- Billing page:
+  - Calls backend to create Stripe Checkout session
+  - Redirects to Stripe
+
+====================================================
+5. MOBILE APP (apps/mobile)
+====================================================
+
+Tech:
+- Expo (React Native)
+- Firebase client SDK
+- React Navigation
+
+Structure:
+
+/apps/mobile
+  /app (Expo router or /src)
+  /components
+  /hooks
+  /config
+  app.json
+  package.json
+
+Core features:
+
+- Firebase client config (mirrors web)
+- Auth flow:
+  - Login screen
+  - Register (optional)
+  - Protected screens after login
+- Screens:
+  - Dashboard
+  - Clients
+  - Tasks
+  - Notes
+  - Files
+- API client:
+  - Uses same API base URL as web
+  - Sends Firebase ID token in Authorization header
+
+====================================================
+6. WORKSPACE CONFIG
+====================================================
+
+Root package.json:
+- Define workspaces:
+  - "apps/*"
+  - "packages/*"
+
+Add scripts:
+- "dev:api": "pnpm --filter @sparq2/api dev"
+- "dev:web": "pnpm --filter @sparq2/web dev"
+- "dev:mobile": "pnpm --filter @sparq2/mobile start"
+- "dev": "concurrently \"pnpm dev:api\" \"pnpm dev:web\""
+
+====================================================
+7. RULES
+====================================================
+
+- Use ESM everywhere.
+- Keep everything minimal and modular.
+- No extra providers beyond:
+  - Firebase
+  - Stripe
+  - Railway (deployment target)
+- Do not generate UI beyond basic, functional screens.
+- Prefer clean, readable code over clever abstractions.
+
+Now:
+- Generate all missing files and code for this monorepo.
+- Do not overwrite existing logic unless required for compatibility.

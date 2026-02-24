@@ -1,0 +1,24 @@
+{
+  "name": "@sparq2/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/api/server.js",
+  "scripts": {
+    "dev": "node --watch src/api/server.js",
+    "start": "node src/api/server.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@sparq2/shared": "workspace:*",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "firebase-admin": "^12.7.0",
+    "stripe": "^14.25.0"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0",
+    "vitest": "^2.1.8"
+  }
+}

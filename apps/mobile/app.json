@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "SparQ2",
+    "slug": "sparq2",
+    "scheme": "sparq2",
+    "version": "0.1.0",
+    "sdkVersion": "51.0.0",
+    "platforms": ["ios", "android", "web"],
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic"
+  }
+}
