@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 import {
+  createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -14,6 +15,7 @@ type AuthContextValue = {
   user: User | null;
   loading: boolean;
   loginWithEmail: (email: string, password: string) => Promise<void>;
+  registerWithEmail: (email: string, password: string) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
 };
@@ -38,6 +40,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       loading,
       async loginWithEmail(email, password) {
         await signInWithEmailAndPassword(firebaseAuth, email, password);
+      },
+      async registerWithEmail(email, password) {
+        await createUserWithEmailAndPassword(firebaseAuth, email, password);
       },
       async loginWithGoogle() {
         const provider = new GoogleAuthProvider();

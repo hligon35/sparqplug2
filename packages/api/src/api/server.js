@@ -27,7 +27,7 @@ export function createApp() {
   app.use(express.json({ limit: '1mb' }));
 
   app.get('/health', (req, res) => {
-    res.json({ status: 'ok', service: 'SparQ2 API' });
+    res.json({ status: 'ok', service: 'SparQ Plug API' });
   });
 
   app.get('/version', (req, res) => {

@@ -1,6 +1,8 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { APP_NAME } from '@sparq2/shared';
 import { useAuth } from '../hooks/useAuth';
+
+import logo from '../assets/sparqpluglogo.png';
+import { Button } from './ui/Button';
 
 const links = [
   { to: '/dashboard', label: 'Dashboard' },
@@ -16,33 +18,46 @@ export function Layout() {
   const { user, logout } = useAuth();
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'system-ui, sans-serif' }}>
-      <aside style={{ width: 220, padding: 16, borderRight: '1px solid #eee' }}>
-        <div style={{ fontWeight: 700, marginBottom: 12 }}>{APP_NAME}</div>
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {links.map((l) => (
-            <Link
-              key={l.to}
-              to={l.to}
-              style={{
-                textDecoration: 'none',
-                color: pathname === l.to ? '#111' : '#444',
-                fontWeight: pathname === l.to ? 700 : 400
-              }}
-            >
-              {l.label}
-            </Link>
-          ))}
-        </nav>
-        <div style={{ marginTop: 16, fontSize: 12, color: '#555' }}>{user?.email}</div>
-        <button style={{ marginTop: 8 }} onClick={() => logout()}>
-          Logout
-        </button>
-      </aside>
+    <div className="min-h-screen">
+      <div className="h-[56px] border-b border-gray-200 bg-white">
+        <div className="h-full px-4 flex items-center justify-between max-w-[1200px] mx-auto">
+          <div className="flex items-center gap-3">
+            <img src={logo} alt="SparQ Plug" className="w-8 h-8 object-contain" />
+            <div className="font-bold text-[#111827]">SparQ Plug</div>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:block text-sm opacity-70">{user?.email}</div>
+            <Button variant="ghost" onClick={() => logout()}>
+              Logout
+            </Button>
+          </div>
+        </div>
+      </div>
 
-      <main style={{ flex: 1, padding: 16 }}>
-        <Outlet />
-      </main>
+      <div className="flex">
+        <aside className="hidden lg:block w-[280px] border-r border-gray-200 bg-white min-h-[calc(100vh-56px)]">
+          <nav className="p-4 flex flex-col gap-1">
+            {links.map((l) => {
+              const active = pathname === l.to || (l.to === '/dashboard' && pathname === '/');
+              return (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  className={`rounded-2xl px-4 py-3 font-semibold ${
+                    active ? 'bg-gray-100 text-[#111827]' : 'text-[#111827] opacity-70 hover:opacity-100'
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              );
+            })}
+          </nav>
+        </aside>
+
+        <main className="flex-1">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-export const APP_NAME = 'SparQ2';
+export const APP_NAME = 'SparQ Plug';
 export const APP_VERSION = '0.1.0';
 
 export const ROLES = Object.freeze({

@@ -10,7 +10,32 @@
     "dev:api": "pnpm --filter @sparq2/api dev",
     "dev:web": "pnpm --filter @sparq2/web dev",
     "dev:mobile": "pnpm --filter @sparq2/mobile start",
-    "dev": "concurrently \"pnpm dev:api\" \"pnpm dev:web\""
+    "dev": "concurrently \"pnpm dev:api\" \"pnpm dev:web\"",
+
+    "run:api": "pnpm --filter @sparq2/api dev",
+    "run:web": "pnpm --filter @sparq2/web dev",
+    "run:mobile": "pnpm -C apps/mobile start",
+    "run:android": "pnpm -C apps/mobile start --android",
+    "run:ios": "pnpm -C apps/mobile start --ios",
+    "run:mobile-web": "pnpm -C apps/mobile start --web",
+    "run:all": "concurrently \"pnpm run:api\" \"pnpm run:web\" \"pnpm run:mobile\"",
+
+    "start:api": "pnpm --filter @sparq2/api start",
+    "build:web": "pnpm --filter @sparq2/web build",
+    "preview:web": "pnpm --filter @sparq2/web preview",
+    "test:api": "pnpm --filter @sparq2/api test",
+
+    "build:mobile:internal": "pnpm -C apps/mobile dlx eas-cli build --platform all --profile internal",
+    "build:mobile:preview": "pnpm -C apps/mobile dlx eas-cli build --platform all --profile preview",
+    "build:mobile:production": "pnpm -C apps/mobile dlx eas-cli build --platform all --profile production",
+
+    "build:android:internal": "pnpm -C apps/mobile dlx eas-cli build --platform android --profile internal",
+    "build:android:preview": "pnpm -C apps/mobile dlx eas-cli build --platform android --profile preview",
+    "build:android:production": "pnpm -C apps/mobile dlx eas-cli build --platform android --profile production",
+
+    "build:ios:internal": "pnpm -C apps/mobile dlx eas-cli build --platform ios --profile internal",
+    "build:ios:preview": "pnpm -C apps/mobile dlx eas-cli build --platform ios --profile preview",
+    "build:ios:production": "pnpm -C apps/mobile dlx eas-cli build --platform ios --profile production"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

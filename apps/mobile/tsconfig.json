@@ -7,12 +7,14 @@
     ],
     "jsx": "react-jsx",
     "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "moduleResolution": "Bundler",
     "noEmit": true,
     "skipLibCheck": true,
     "types": [
       "react",
-      "react-native"
+      "react-native",
+      "node"
     ]
   },
   "include": [

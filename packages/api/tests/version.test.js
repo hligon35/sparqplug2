@@ -8,6 +8,6 @@ describe('GET /version', () => {
     const app = createApp();
     const res = await request(app).get('/version');
     expect(res.status).toBe(200);
-    expect(res.body).toEqual({ app: 'SparQ2', version: '0.1.0' });
+    expect(res.body).toEqual({ app: 'SparQ Plug', version: '0.1.0' });
   });
 });

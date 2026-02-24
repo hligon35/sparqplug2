@@ -1,4 +1,4 @@
-# SparQ2
+# SparQ Plug
 
 Lean monorepo scaffold for:
 
