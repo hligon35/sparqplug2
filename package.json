@@ -2,6 +2,9 @@
   "name": "sparq2",
   "private": true,
   "packageManager": "pnpm@9.15.5",
+  "engines": {
+    "node": ">=20 <23"
+  },
   "workspaces": [
     "apps/*",
     "packages/*"

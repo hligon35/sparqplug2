@@ -6,7 +6,9 @@ import { Layout } from '../components/Layout';
 import { LoginPage } from '../pages/LoginPage';
 import { DashboardPage } from '../pages/DashboardPage';
 import { ClientsPage } from '../pages/ClientsPage';
+import { ClientDetailsPage } from '../pages/ClientDetailsPage';
 import { TasksPage } from '../pages/TasksPage';
+import { TaskDetailPage } from '../pages/TaskDetailPage';
 import { NotesPage } from '../pages/NotesPage';
 import { FilesPage } from '../pages/FilesPage';
 import { BillingPage } from '../pages/BillingPage';
@@ -21,7 +23,9 @@ export function App() {
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/clients" element={<ClientsPage />} />
+          <Route path="/clients/:clientId" element={<ClientDetailsPage />} />
           <Route path="/tasks" element={<TasksPage />} />
+          <Route path="/tasks/:taskId" element={<TaskDetailPage />} />
           <Route path="/notes" element={<NotesPage />} />
           <Route path="/files" element={<FilesPage />} />
           <Route path="/billing" element={<BillingPage />} />

@@ -38,7 +38,10 @@ export function Layout() {
         <aside className="hidden lg:block w-[280px] border-r border-gray-200 bg-white min-h-[calc(100vh-56px)]">
           <nav className="p-4 flex flex-col gap-1">
             {links.map((l) => {
-              const active = pathname === l.to || (l.to === '/dashboard' && pathname === '/');
+              const active =
+                pathname === l.to ||
+                (l.to === '/dashboard' && (pathname === '/' || pathname.startsWith('/dashboard'))) ||
+                (l.to !== '/dashboard' && pathname.startsWith(l.to));
               return (
                 <Link
                   key={l.to}
