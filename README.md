@@ -46,6 +46,8 @@ Web: `http://localhost:5173`
 pnpm dev:mobile
 ```
 
+If Metro's default port (8081) is already in use, the mobile start scripts will automatically pick 8082+ to avoid interactive prompts.
+
 If Expo Go times out connecting to Metro on your phone, start with a tunnel:
 
 ```bash

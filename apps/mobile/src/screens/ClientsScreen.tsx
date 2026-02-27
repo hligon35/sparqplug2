@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { Pressable, Text, View } from 'react-native';
 
 import { apiFetch } from '../utils/apiClient';
 import { Screen } from '../components/ui/Screen';
@@ -12,6 +13,17 @@ import { StackModal } from '../components/ui/StackModal';
 import { FloatingLabelInput } from '../components/ui/FloatingLabelInput';
 
 type Client = { id: string; name?: string; email?: string };
+
+function HeaderIconButton({ icon, onPress }: { icon: any; onPress: () => void }) {
+  return (
+    <Pressable
+      onPress={onPress}
+      className="w-12 h-12 items-center justify-center rounded-full bg-white border border-gray-200"
+    >
+      <Ionicons name={icon} size={22} color="black" />
+    </Pressable>
+  );
+}
 
 export function ClientsScreen({ navigation }: any) {
   const [busy, setBusy] = useState(false);
@@ -61,7 +73,12 @@ export function ClientsScreen({ navigation }: any) {
   }, []);
 
   return (
-    <Screen title="Clients" statusText={statusText} scroll={false}>
+    <Screen
+      title="Clients"
+      statusText={statusText}
+      scroll={false}
+      headerRight={<HeaderIconButton icon="person-outline" onPress={() => navigation.navigate('Profile')} />}
+    >
       <View className="flex-1">
         <Card>
           <SectionHeader
