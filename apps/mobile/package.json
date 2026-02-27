@@ -22,6 +22,7 @@
     "@react-navigation/native-stack": "^6.11.0",
     "@sparq2/shared": "workspace:*",
     "expo": "~54.0.33",
+    "expo-constants": "~18.0.13",
     "firebase": "^10.14.1",
     "nativewind": "^4.2.2",
     "react": "19.1.0",

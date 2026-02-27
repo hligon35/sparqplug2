@@ -2,6 +2,8 @@ import React from 'react';
 import { ImageBackground, ScrollView, Text, View, type ViewStyle } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useDebug } from '../../hooks/useDebug';
+
 type Props = {
   title?: string;
   statusText?: string | null;
@@ -22,10 +24,15 @@ export function Screen({
   style
 }: Props) {
   const insets = useSafeAreaInsets();
+  const debug = useDebug();
   const contentTopPadding = 12;
+  const debugBounds = debug?.enabled && debug.toggles.showLayoutBounds;
 
   const content = (
-    <View className={`px-4 pt-3 gap-4 ${contentClassName}`} style={style}>
+    <View
+      className={`px-4 pt-3 gap-4 ${debugBounds ? 'border border-red-500 border-dashed' : ''} ${contentClassName}`}
+      style={style}
+    >
       {title ? (
         <View className="flex-row items-center justify-between">
           <Text className="text-[22px] font-bold text-gray-900">{title}</Text>

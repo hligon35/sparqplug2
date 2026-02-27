@@ -12,6 +12,7 @@ import { TaskDetailPage } from '../pages/TaskDetailPage';
 import { NotesPage } from '../pages/NotesPage';
 import { FilesPage } from '../pages/FilesPage';
 import { BillingPage } from '../pages/BillingPage';
+import { DiagnosticsPage } from '../pages/DiagnosticsPage';
 
 export function App() {
   return (
@@ -29,6 +30,7 @@ export function App() {
           <Route path="/notes" element={<NotesPage />} />
           <Route path="/files" element={<FilesPage />} />
           <Route path="/billing" element={<BillingPage />} />
+          <Route path="/diagnostics" element={<DiagnosticsPage />} />
         </Route>
       </Route>
     </Routes>

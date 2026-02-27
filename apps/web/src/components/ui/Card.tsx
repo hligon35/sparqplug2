@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDebug } from '../../hooks/useDebug';
 
 type Props = {
   children: React.ReactNode;
@@ -6,5 +7,16 @@ type Props = {
 };
 
 export function Card({ children, className = '' }: Props) {
-  return <div className={`rounded-2xl border border-gray-200 bg-white p-4 ${className}`}>{children}</div>;
+  const debug = useDebug();
+  const showBounds = Boolean(debug?.enabled && debug.toggles.showLayoutBounds);
+
+  return (
+    <div
+      className={`rounded-2xl border bg-white p-4 ${
+        showBounds ? 'border-red-500 border-dashed' : 'border-gray-200'
+      } ${className}`}
+    >
+      {children}
+    </div>
+  );
 }

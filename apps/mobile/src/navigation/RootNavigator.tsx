@@ -10,6 +10,7 @@ import { TaskDetailScreen } from '../screens/TaskDetailScreen';
 import { TaskEditScreen } from '../screens/TaskEditScreen';
 import { NotesScreen } from '../screens/NotesScreen';
 import { FilesScreen } from '../screens/FilesScreen';
+import { DiagnosticsScreen } from '../screens/DiagnosticsScreen';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -21,6 +22,7 @@ export type RootStackParamList = {
   TaskEdit: { taskId?: string };
   Notes: undefined;
   Files: undefined;
+  Diagnostics: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -47,6 +49,7 @@ export function RootNavigator() {
       <Stack.Screen name="TaskEdit" component={TaskEditScreen} options={{ title: 'Edit Task' }} />
       <Stack.Screen name="Notes" component={NotesScreen} />
       <Stack.Screen name="Files" component={FilesScreen} />
+      <Stack.Screen name="Diagnostics" component={DiagnosticsScreen} options={{ title: 'Diagnostics' }} />
     </Stack.Navigator>
   );
 }

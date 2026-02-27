@@ -1,8 +1,11 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 
 import logo from '../assets/sparqpluglogo.png';
 import { Button } from './ui/Button';
+import { DebugPanel } from './DebugPanel';
+import { debugLog, getDebugState } from '../debug/debugStore';
 
 const links = [
   { to: '/dashboard', label: 'Dashboard' },
@@ -16,6 +19,13 @@ const links = [
 export function Layout() {
   const { pathname } = useLocation();
   const { user, logout } = useAuth();
+
+  useEffect(() => {
+    const debug = getDebugState();
+    if (debug.enabled && debug.toggles.traceNavigation) {
+      debugLog('log', 'nav', 'route', { to: pathname });
+    }
+  }, [pathname]);
 
   return (
     <div className="min-h-screen">
@@ -61,6 +71,8 @@ export function Layout() {
           <Outlet />
         </main>
       </div>
+
+      <DebugPanel />
     </div>
   );
 }
