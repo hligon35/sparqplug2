@@ -28,7 +28,7 @@ export function Screen({
     <View className={`px-4 pt-3 gap-4 ${contentClassName}`} style={style}>
       {title ? (
         <View className="flex-row items-center justify-between">
-          <Text className="text-[22px] font-bold text-[#111827]">{title}</Text>
+          <Text className="text-[22px] font-bold text-gray-900">{title}</Text>
           {headerRight ? <View>{headerRight}</View> : null}
         </View>
       ) : null}

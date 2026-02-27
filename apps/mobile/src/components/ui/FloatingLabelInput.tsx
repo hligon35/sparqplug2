@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Pressable, Text, TextInput, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 
 type Props = {
   label: string;
@@ -56,7 +56,7 @@ export function FloatingLabelInput({
             onBlur={() => setFocused(false)}
             multiline={multiline}
             numberOfLines={numberOfLines}
-            className="text-base text-[#111827]"
+            className="text-base text-gray-900"
           />
         </View>
         {rightAffordance ? <View className="pl-3">{rightAffordance}</View> : null}

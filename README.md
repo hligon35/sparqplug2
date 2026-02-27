@@ -11,19 +11,26 @@ Lean monorepo scaffold for:
 
 This repo uses **pnpm workspaces**. Use `pnpm install` (not `npm install`).
 
+### Node version
+
+This monorepo requires Node **>=20 <23** (Expo CLI will crash on Node 24+).
+
+- If you use `nvm`/`fnm`, this repo pins Node via `.nvmrc` / `.node-version`.
+- On Windows, you can use **nvm-windows** or **fnm** to switch Node versions.
+
 1) Install deps:
 
 ```bash
 pnpm install
 ```
 
-2) Copy env:
+1) Copy env:
 
 ```bash
 copy .env.example .env
 ```
 
-3) Run API + Web:
+1) Run API + Web:
 
 ```bash
 pnpm dev
@@ -33,10 +40,30 @@ API: `http://localhost:4000/health`
 
 Web: `http://localhost:5173`
 
-4) Run Mobile:
+1) Run Mobile:
 
 ```bash
 pnpm dev:mobile
+```
+
+If Expo Go times out connecting to Metro on your phone, start with a tunnel:
+
+```bash
+pnpm -C apps/mobile run start:tunnel
+```
+
+### Windows note (Node + nvm-windows)
+
+If Windows PATH order causes `node` to resolve to `C:\Program Files\nodejs` instead of nvm’s symlink, use the repo helper:
+
+```powershell
+./run-mobile.ps1
+```
+
+Or from `cmd.exe`:
+
+```bat
+run-mobile.cmd
 ```
 
 ## Packages

@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import { apiFetch } from '../utils/apiClient';
 import { Screen } from '../components/ui/Screen';
 import { Card } from '../components/ui/Card';
 import { SectionHeader } from '../components/ui/SectionHeader';
 import { ListRow } from '../components/ui/ListRow';
-import { Badge } from '../components/ui/Badge';
+import { Button } from '../components/ui/Button';
 import { FloatingActionButton } from '../components/ui/FloatingActionButton';
 
 type Task = { id: string; title?: string; status?: 'todo' | 'doing' | 'done' };
@@ -45,12 +45,18 @@ export function TasksScreen({ navigation }: any) {
     <Screen title="Tasks" statusText={statusText} scroll={false}>
       <View className="flex-1">
         <Card>
-          <View className="flex-row items-center justify-between">
-            <Text className="text-sm opacity-70">{busy ? 'Loading…' : 'Status'}</Text>
-            <Pressable disabled={busy} onPress={() => refresh()}>
-              <Badge label={busy ? 'Loading…' : 'Sync'} variant={offline ? 'danger' : 'indigo'} />
-            </Pressable>
-          </View>
+          <SectionHeader
+            title="Status"
+            subtitle={busy ? 'Loading…' : offline ? 'Offline' : 'Online'}
+            right={
+              <Button
+                label={busy ? 'Loading…' : offline ? 'Retry' : 'Sync'}
+                variant="secondary"
+                disabled={busy}
+                onPress={() => refresh()}
+              />
+            }
+          />
         </Card>
 
         <Card>

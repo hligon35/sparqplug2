@@ -1,0 +1,10 @@
+{
+  // This workspace uses pnpm workspaces.
+  "npm.packageManager": "pnpm",
+
+  // Ensure the integrated terminal prefers nvm-windows' Node over "C:\\Program Files\\nodejs".
+  // This prevents pnpm from failing the repo's engines.node check when a newer system Node is installed.
+  "terminal.integrated.env.windows": {
+    "Path": "${env:NVM_SYMLINK};${env:Path}"
+  }
+}

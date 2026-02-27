@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "run:web (pinned node)",
+      "type": "shell",
+      "command": "${workspaceFolder}\\run.cmd",
+      "args": ["run", "run:web"],
+      "problemMatcher": []
+    },
+    {
+      "label": "run:api (pinned node)",
+      "type": "shell",
+      "command": "${workspaceFolder}\\run.cmd",
+      "args": ["run", "run:api"],
+      "problemMatcher": []
+    },
+    {
+      "label": "dev:mobile (pinned node)",
+      "type": "shell",
+      "command": "${workspaceFolder}\\run-mobile.cmd",
+      "problemMatcher": []
+    }
+  ]
+}

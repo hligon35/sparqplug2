@@ -15,12 +15,12 @@ export function Button({ label, onPress, disabled, variant = 'primary', right }:
   const base = 'rounded-2xl px-4 py-3 flex-row items-center justify-center';
   const variantClass =
     variant === 'primary'
-      ? 'bg-[#4F46E5]'
+      ? 'bg-indigo-600'
       : variant === 'secondary'
         ? 'bg-white border border-gray-200'
         : 'bg-transparent';
   const textClass =
-    variant === 'primary' ? 'text-white' : variant === 'secondary' ? 'text-[#111827]' : 'text-[#111827]';
+    variant === 'primary' ? 'text-white' : variant === 'secondary' ? 'text-gray-900' : 'text-gray-900';
   const disabledClass = disabled ? 'opacity-50' : '';
 
   return (

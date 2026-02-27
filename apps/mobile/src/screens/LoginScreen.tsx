@@ -49,7 +49,7 @@ export function LoginScreen() {
               secureTextEntry={!showPassword}
               rightAffordance={
                 <Pressable onPress={() => setShowPassword((v) => !v)} className="px-2 py-2">
-                  <Text className="font-semibold opacity-70">{showPassword ? 'Hide' : 'Show'}</Text>
+                  <Text className="font-semibold opacity-70 text-gray-900">{showPassword ? 'Hide' : 'Show'}</Text>
                 </Pressable>
               }
             />

@@ -18,7 +18,7 @@ export function DashboardScreen({ navigation }: any) {
       statusText={`v${APP_VERSION}`}
       headerRight={<Button label="Logout" variant="ghost" onPress={() => logout()} />}
     >
-      <View className="rounded-2xl bg-[#4F46E5] p-4">
+      <View className="rounded-2xl bg-indigo-600 p-4">
         <View className="flex-row items-center justify-between">
           <Text className="text-white font-bold text-base">Upcoming Meet</Text>
           <Badge variant="indigo" label="Join" />

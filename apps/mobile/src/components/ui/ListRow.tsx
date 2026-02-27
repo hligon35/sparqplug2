@@ -17,7 +17,7 @@ export function ListRow({ title, subtitle, rightText, onPress, showDivider = tru
     >
       <View className="flex-row items-center justify-between">
         <View className="flex-1 pr-3">
-          <Text className="text-base font-semibold text-[#111827]">{title}</Text>
+          <Text className="text-base font-semibold text-gray-900">{title}</Text>
           {subtitle ? <Text className="text-sm opacity-70">{subtitle}</Text> : null}
         </View>
         {rightText ? <Text className="text-sm opacity-70">{rightText}</Text> : null}

@@ -11,7 +11,7 @@ export function TaskDetailScreen({ route }: any) {
     <Screen title="Task" statusText={taskId ? `ID: ${taskId}` : null}>
       <Card>
         <SectionHeader title="Details" subtitle="Placeholder" />
-        <Text className="text-sm opacity-70 mt-3">Task details view will appear here.</Text>
+        <Text className="text-sm opacity-70 mt-4">Task details view will appear here.</Text>
       </Card>
     </Screen>
   );

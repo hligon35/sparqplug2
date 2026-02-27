@@ -11,12 +11,12 @@ type Props = {
 export function Badge({ label, variant = 'default' }: Props) {
   const className =
     variant === 'danger'
-      ? 'bg-[#DC2626]'
+      ? 'bg-red-600'
       : variant === 'indigo'
-        ? 'bg-[#4F46E5]'
+        ? 'bg-indigo-600'
         : 'bg-gray-200';
 
-  const textClassName = variant === 'default' ? 'text-[#111827]' : 'text-white';
+  const textClassName = variant === 'default' ? 'text-gray-900' : 'text-white';
 
   return (
     <View className={`rounded-full px-3 py-1 ${className}`}>
